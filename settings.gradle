@@ -1,0 +1,14 @@
+include 'spring-data:spring-data-rest-associations'
+include 'spring-data:spring-data-rest-springfox'
+
+include 'pact:pact-spring-provider'
+include 'pact:pact-feign-consumer'
+
+include 'spring-boot:modular:security-module'
+include 'spring-boot:modular:booking-module'
+include 'spring-boot:modular:application'
+
+include 'junit:conditions'
+
+
+
