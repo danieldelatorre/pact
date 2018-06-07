@@ -1,0 +1,75 @@
+{
+    "provider": {
+        "name": "userservice"
+    },
+    "consumer": {
+        "name": "userclient"
+    },
+    "interactions": [
+        {
+            "description": "a request to PUT a person",
+            "request": {
+                "method": "PUT",
+                "path": "/user-service/users/42",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "firstName": "Zaphod",
+                    "lastName": "Beeblebrox"
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "firstName": "Zaphod",
+                    "lastName": "Beeblebrox"
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "person 42 exists"
+                }
+            ]
+        },
+        {
+            "description": "a request to POST a person",
+            "request": {
+                "method": "POST",
+                "path": "/user-service/users",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "firstName": "Daniel",
+                    "lastName": "de la Torre"
+                }
+            },
+            "response": {
+                "status": 201,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "id": 42
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "provider accepts a new person"
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "pact-specification": {
+            "version": "3.0.0"
+        },
+        "pact-jvm": {
+            "version": "3.5.2"
+        }
+    }
+}

@@ -2,6 +2,8 @@ package io.reflectoring;
 
 import au.com.dius.pact.provider.junit.Provider;
 import au.com.dius.pact.provider.junit.State;
+import au.com.dius.pact.provider.junit.loader.PactBroker;
+import au.com.dius.pact.provider.junit.loader.PactBrokerAuth;
 import au.com.dius.pact.provider.junit.loader.PactFolder;
 import au.com.dius.pact.provider.junit.target.HttpTarget;
 import au.com.dius.pact.provider.junit.target.Target;
@@ -21,7 +23,9 @@ import static org.mockito.Mockito.when;
 @Provider("userservice")// tells pact that we’re testing the provider called “userservice”. Pact will automatically filter out all interactions from the loaded pact files that are not addressed at the provider “userservice”
 
 //With @PactFolder we tell Pact where to look for pact files that serve as the base for our contract test. Note that there are other options for loading pact files such as the @PactBroker annotation.
-@PactFolder("/home/dani/workspace/pact-code-examples-master/target/pacts")
+//@PactFolder("/home/dani/workspace/pact-code-examples-master/pact/pact-feign-consumer/build/pacts")
+@PactBroker(host = "localhost", port = "80")
+@PactBrokerAuth(scheme = "Basic",username = "pactbrokeruser" , password = "TheUserPassword")
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
         properties = {"server.port=8080"}
