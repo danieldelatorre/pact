@@ -37,12 +37,15 @@ with the port 80 of the container. So to access the broker dashboard we should w
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Test
+Test Consumer
 
 ./gradlew test ->will create the pact in /build/pacts if everything runs smoothly
 
-./gradlew pactPublsih ->publish the pact in the pact broker. You will be able to see it in the broker dashboard(http://localhost)
+./gradlew pactPublish ->publish the pact in the pact broker. You will be able to see it in the broker dashboard(http://localhost)
 
+Test Provider
+
+./gradle test -> will verify the pact in the pact broker.
 
 Link with a good example
 https://medium.com/techbeatscorner/consumer-driven-contracts-using-a-pact-broker-b1743c2f8fe5

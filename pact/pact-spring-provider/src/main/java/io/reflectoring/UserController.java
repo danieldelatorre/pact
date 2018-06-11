@@ -1,11 +1,13 @@
 package io.reflectoring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -27,15 +29,16 @@ public class UserController {
 
 	@PutMapping(path = "/user-service/users/{id}")
 	public ResponseEntity<User> updateUser(@RequestBody @Valid User user, @PathVariable long id) {
-		User userFromDb = userRepository.findOne(id);
-		userFromDb.updateFrom(user);
-		userFromDb = userRepository.save(userFromDb);
-		return ResponseEntity.ok(userFromDb);
+		Optional<User> userFromDb = userRepository.findById(id);
+		User userDB = userFromDb.get();
+		userDB.updateFrom(user);
+		userRepository.save(user);
+		return ResponseEntity.ok(user);
 	}
 
 	@GetMapping(path = "/user-service/users/{id}")
 	public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
-		return ResponseEntity.ok(userRepository.findOne(id));
+		return ResponseEntity.ok(userRepository.findById(id).get());
 	}
 
 

@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.Optional;
+
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
@@ -28,7 +30,7 @@ import static org.mockito.Mockito.when;
 @PactBrokerAuth(scheme = "Basic",username = "pactbrokeruser" , password = "TheUserPassword")
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
-        properties = {"server.port=8080"}
+        properties = {"server.port=8081"}
 )
 public class UserControllerProviderTest {
 
@@ -40,7 +42,7 @@ public class UserControllerProviderTest {
 //  With @TestTarget we mark a field of type Target that provides exactly this information. In our case, we tell Pact to send the requests via HTTP to localhost:8080,
 //  since we started the Spring Boot application on the same port.
   @TestTarget
-  public final Target target = new HttpTarget(8080);
+  public final Target target = new HttpTarget(8081);
 
   //Finally, we create a method that puts our Spring Boot application into a defined state that is suitable to respond to the mock consumer’s requests
 // In our case, the pact file defines a single providerState named provider accepts a new person.
@@ -49,10 +51,11 @@ public class UserControllerProviderTest {
   public void toCreatePersonState() {
 
     User user = new User();
-    user.setId(42L);
-    user.setFirstName("Daniel");
-    user.setLastName("de la Torre");
-    when(userRepository.findOne(eq(42L))).thenReturn(user);
+    Optional<User> userOptional = Optional.of(user);
+    userOptional.get().setId(42L);
+    userOptional.get().setFirstName("Daniel");
+    userOptional.get().setLastName("de la Torre");
+    when(userRepository.findById(eq(42L))).thenReturn(userOptional);
     when(userRepository.save(any(User.class))).thenReturn(user);
   }
 

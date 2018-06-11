@@ -5,9 +5,13 @@ buildscript {
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springboot_version}"
-        classpath("au.com.dius:pact-jvm-provider-gradle_2.11:3.4.1")
     }
 }
+
+plugins {
+    id "au.com.dius.pact" version "3.5.14"
+}
+
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'au.com.dius.pact'
@@ -38,6 +42,6 @@ pact {
         pactBrokerUrl = 'http://localhost/'
         pactBrokerUsername = 'pactbrokeruser'
         pactBrokerPassword = 'TheUserPassword'
-        version = '3.5.0'
+        version = '0.0.1'
     }
 }
