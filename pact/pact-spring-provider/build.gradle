@@ -11,7 +11,7 @@ buildscript {
 }
 
 plugins {
-    id "au.com.dius.pact" version "3.5.14"
+    id "au.com.dius.pact" version "3.5.17"
 }
 
 apply plugin: 'au.com.dius.pact'
